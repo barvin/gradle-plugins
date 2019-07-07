@@ -1,2 +1,2 @@
-# gradle-plugins
-Gradle Plugins for Test Automation
+# Gradle Plugins for Test Automation
+
