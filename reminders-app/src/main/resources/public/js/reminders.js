@@ -5,88 +5,49 @@ $('#add-reminder-date-time').datetimepicker({
 
 });
 
-$( "#btn-save-file" ).click(function() {
+$( "#btn-add-reminder" ).click(function() {
     $.ajax({
-        url: 'file/save',
-        type: 'POST',
+        url: 'reminder',
+        type: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({ "text": $( "#text-to-save" ).val() }),
-        success: function(data){
-            $( "#save-confirm" ).addClass("text-success");
-            $( "#save-confirm" ).val(data);
+        data: JSON.stringify(
+        {
+            "text": $( "#add-reminder-text" ).val(),
+            "time": moment($( "#add-reminder-date-time input" ).val(), "DD.MM.YYYY HH:mm").toISOString(),
+            "done": false
+        }),
+        success: function(){
+            $.ajax({
+                url: 'reminder',
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(data){
+                    $( "#reminders-list" ).empty();
+                    data.forEach(function(reminder) {
+                        $( "#reminders-list" ).append('' +
+    '                    <div class="input-group col-10 mb-3 reminder" style="padding-left: 0;">' +
+    '                        <div class="input-group-prepend">' +
+    '                            <div class="input-group-text">' +
+    '                                <input type="checkbox" class="is-done">' +
+    '                            </div>' +
+    '                        </div>' +
+    '                        <input type="text" class="form-control reminder-text" value="'+reminder.text+'">' +
+    '                        <input type="text" class="form-control reminder-date col-2" value="'+reminder.time+'">' +
+    '                        <div class="input-group-append">' +
+    '                            <button class="btn btn-outline-secondary update" type="button">Update</button>' +
+    '                            <button class="btn btn-outline-secondary delete" type="button">Delete</button>' +
+    '                        </div>' +
+    '                    </div>' +
+                        '');
+                    });
+                },
+                error: function(data){
+                    alert(data);
+                }
+            });
         },
         error: function(data){
-            $( "#save-confirm" ).addClass("text-danger");
-            $( "#save-confirm" ).val(data.message);
+            alert(data);
         }
     });
-});
-
-$( "#text-to-save" ).keypress(function() {
-    $( "#save-confirm" ).removeClass("text-success text-danger");
-    $( "#save-confirm" ).val("");
-});
-
-// read file
-$( "#btn-read-file" ).click(function() {
-    $.ajax({
-        url: 'file/read',
-        type: 'GET',
-        success: function(data){
-            $( "#read-confirm" ).val(data);
-        },
-        error: function(data){
-            $( "#read-confirm" ).addClass("text-danger");
-            $( "#read-confirm" ).val(data.message);
-        }
-    });
-});
-
-// get weather
-$( "#btn-get-weather" ).click(function() {
-    $.ajax({
-        url: 'weather/' + $( "#weather-city" ).val(),
-        type: 'GET',
-        success: function(data){
-            $( "#weather-result-temp" ).val(data.temperature);
-            $( "#weather-result-descr" ).val(data.description);
-        },
-        error: function(data){
-            $( "#weather-error" ).val(data.responseJSON.description);
-        }
-    });
-});
-
-$( "#weather-city" ).keypress(function() {
-    $( "#weather-result-temp" ).val("");
-    $( "#weather-result-descr" ).val("");
-    $( "#weather-error" ).val("");
-});
-
-// send message
-$( "#btn-msg-send" ).click(function() {
-    $.ajax({
-        url: 'message/send',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ "sender": $( "#msg-sender" ).val(), "text": $( "#msg-text" ).val() }),
-        success: function(data) {
-            $( "#msg-result" ).addClass("text-success");
-            $( "#msg-result" ).val(data);
-        },
-        error: function(data){
-            $( "#msg-result" ).addClass("text-danger");
-            $( "#msg-result" ).val(data.message);
-        }
-    });
-});
-
-$( "#msg-sender" ).keypress(function() {
-    $( "#msg-result" ).removeClass("text-success text-danger");
-    $( "#msg-result" ).val("");
-});
-
-$( "#msg-text" ).keypress(function() {
-    $( "#msg-result" ).removeClass("text-success text-danger");
-    $( "#msg-result" ).val("");
 });

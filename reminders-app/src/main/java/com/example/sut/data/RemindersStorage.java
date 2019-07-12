@@ -13,12 +13,20 @@ public class RemindersStorage {
     }
 
     public static void update(Reminder reminder) {
-
-        storage.add(reminder);
+        Reminder existingReminder = storage.get(reminder.getId());
+        existingReminder.setText(reminder.getText());
+        existingReminder.setTime(reminder.getTime());
+        existingReminder.setDone(reminder.isDone());
     }
 
     public static List<Reminder> getAll() {
         return new ArrayList<>(storage);
+    }
+
+    public static void delete(Integer id) {
+        if (id != null && id >= 0 && id < storage.size()) {
+            storage.remove(id.intValue());
+        }
     }
 
     public static void clearStorage() {

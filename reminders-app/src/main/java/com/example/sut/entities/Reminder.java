@@ -3,9 +3,18 @@ package com.example.sut.entities;
 import java.time.OffsetDateTime;
 
 public class Reminder {
+    private Integer id;
     private String text;
     private OffsetDateTime time;
     private boolean done;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;
