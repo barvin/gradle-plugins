@@ -1,0 +1,23 @@
+plugins {
+    id 'groovy'
+    id 'groovy-gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        myPlugins {
+            id = 'reminder-codegen-plugin'
+            implementationClass = 'com.example.plugins.SwaggerCodeGenPlugin'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+    compile group: 'io.swagger', name: 'swagger-codegen', version: '2.4.7'
+}
