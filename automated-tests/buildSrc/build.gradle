@@ -11,7 +11,7 @@ gradlePlugin {
         }
         testFormatCheck {
             id = 'reminder-test-format-check-plugin'
-            implementationClass = 'com.example.plugins.format_checker.TestFormatCheckPlugin'
+            implementationClass = 'com.example.plugins.TestFormatCheckPlugin'
         }
     }
 }
