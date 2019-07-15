@@ -34,6 +34,7 @@ class SwaggerCodeGenPlugin implements Plugin<Project> {
                 new AntBuilder().copy(todir: "$project.projectDir/src/test/java") {
                     fileset(dir: "$project.projectDir/temp/src/main/java")
                 }
+                new File("$project.projectDir/temp").deleteDir()
             }
         })
     }
