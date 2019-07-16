@@ -1,4 +1,4 @@
-package com.example.steps;
+package com.example.steps.ui;
 
 import com.example.entities.Reminder;
 import com.example.services.ui.RemindersListItem;

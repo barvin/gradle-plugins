@@ -5,9 +5,9 @@ import com.example.entities.Reminder;
 import com.example.groups.Groups;
 import com.example.groups.Sprints;
 import com.example.groups.Teams;
-import com.example.steps.CommonSteps;
-import com.example.steps.NavigationSteps;
-import com.example.steps.ReminderSteps;
+import com.example.steps.ui.CommonUiSteps;
+import com.example.steps.ui.NavigationSteps;
+import com.example.steps.ui.ReminderSteps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -52,7 +52,7 @@ public class RemindersTest {
         NavigationSteps.openRemindersApp();
         ReminderSteps.addReminder(oldReminder);
         ReminderSteps.updateLastReminder(newReminder);
-        CommonSteps.refreshPage();
+        CommonUiSteps.refreshPage();
         ReminderSteps.checkLastReminder(newReminder);
     }
 
@@ -72,7 +72,7 @@ public class RemindersTest {
         NavigationSteps.openRemindersApp();
         ReminderSteps.addReminder(reminder);
         ReminderSteps.deleteLastReminder();
-        CommonSteps.refreshPage();
+        CommonUiSteps.refreshPage();
         ReminderSteps.checkReminderIsAbsent(reminder);
     }
 
