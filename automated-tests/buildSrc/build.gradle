@@ -1,0 +1,26 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        codegen {
+            id = 'reminder-codegen-plugin'
+            implementationClass = 'com.example.plugins.SwaggerCodeGenPlugin'
+        }
+        testFormatCheck {
+            id = 'reminder-test-format-check-plugin'
+            implementationClass = 'com.example.plugins.TestFormatCheckPlugin'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile group: 'io.swagger', name: 'swagger-codegen', version: '2.4.7'
+    compile group: 'com.github.javaparser', name:'javaparser-core', version: '3.14.7'
+}
