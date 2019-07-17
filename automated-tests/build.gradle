@@ -1,6 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'reminder-codegen-plugin'
-apply plugin: 'reminder-test-format-check-plugin'
+apply plugin: 'reminder-codegen'
+apply plugin: 'reminder-test-format-checker'
 
 group 'com.example'
 version '1.0'

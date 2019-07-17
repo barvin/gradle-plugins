@@ -6,11 +6,11 @@ plugins {
 gradlePlugin {
     plugins {
         codegen {
-            id = 'reminder-codegen-plugin'
+            id = 'reminder-codegen'
             implementationClass = 'com.example.plugins.SwaggerCodeGenPlugin'
         }
         testFormatCheck {
-            id = 'reminder-test-format-check-plugin'
+            id = 'reminder-test-format-checker'
             implementationClass = 'com.example.plugins.TestFormatCheckPlugin'
         }
     }
