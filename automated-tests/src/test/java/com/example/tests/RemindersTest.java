@@ -1,10 +1,11 @@
 package com.example.tests;
 
 import com.example.annotations.TestCase;
-import com.example.entities.Reminder;
+import com.example.entities.generated.Reminder;
 import com.example.groups.Groups;
 import com.example.groups.Sprints;
 import com.example.groups.Teams;
+import com.example.steps.api.RemindersApiSteps;
 import com.example.steps.ui.CommonUiSteps;
 import com.example.steps.ui.NavigationSteps;
 import com.example.steps.ui.ReminderSteps;
@@ -17,10 +18,11 @@ public class RemindersTest {
 
     @DataProvider
     public Object[][] createReminderData() {
-        Reminder reminder = new Reminder();
-        reminder.setText("Buy flowers");
-        reminder.setTime(OffsetDateTime.now().plusDays(1));
-        return new Object[][]{new Object[]{reminder}};
+        return new Object[][]{
+                new Object[]{
+                        new Reminder().text("Buy flowers").time(OffsetDateTime.now().plusDays(1)).done(false)
+                }
+        };
     }
 
     @Test(description = "Create reminder",
@@ -35,13 +37,12 @@ public class RemindersTest {
 
     @DataProvider
     public Object[][] updateReminderData() {
-        Reminder oldReminder = new Reminder();
-        oldReminder.setText("Old text");
-        oldReminder.setTime(OffsetDateTime.now().plusDays(2));
-        Reminder newReminder = new Reminder();
-        newReminder.setText("New text");
-        newReminder.setTime(OffsetDateTime.now().plusDays(3));
-        return new Object[][]{new Object[]{oldReminder, newReminder}};
+        return new Object[][]{
+                new Object[]{
+                        new Reminder().text("Old text").time(OffsetDateTime.now().plusDays(1)).done(false),
+                        new Reminder().text("New text").time(OffsetDateTime.now().plusDays(2)).done(false)
+                }
+        };
     }
 
     @Test(description = "Update reminder",
@@ -49,8 +50,8 @@ public class RemindersTest {
             groups = {Teams.BETA, Sprints._1})
     @TestCase("REM-157")
     public void updateReminder(Reminder oldReminder, Reminder newReminder) {
+        RemindersApiSteps.addReminder(oldReminder);
         NavigationSteps.openRemindersApp();
-        ReminderSteps.addReminder(oldReminder);
         ReminderSteps.updateLastReminder(newReminder);
         CommonUiSteps.refreshPage();
         ReminderSteps.checkLastReminder(newReminder);
@@ -58,10 +59,11 @@ public class RemindersTest {
 
     @DataProvider
     public Object[][] deleteReminderData() {
-        Reminder reminder = new Reminder();
-        reminder.setText("Delete me");
-        reminder.setTime(OffsetDateTime.now().plusDays(5));
-        return new Object[][]{new Object[]{reminder}};
+        return new Object[][]{
+                new Object[]{
+                        new Reminder().text("Delete me").time(OffsetDateTime.now().plusDays(5)).done(true)
+                }
+        };
     }
 
     @Test(description = "Delete reminder",
@@ -69,8 +71,8 @@ public class RemindersTest {
             groups = {Teams.GAMMA, Sprints._1})
     @TestCase("REM-171")
     public void deleteReminder(Reminder reminder) {
+        RemindersApiSteps.addReminder(reminder);
         NavigationSteps.openRemindersApp();
-        ReminderSteps.addReminder(reminder);
         ReminderSteps.deleteLastReminder();
         CommonUiSteps.refreshPage();
         ReminderSteps.checkReminderIsAbsent(reminder);

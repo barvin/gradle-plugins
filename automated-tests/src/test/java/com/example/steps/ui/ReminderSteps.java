@@ -1,6 +1,6 @@
 package com.example.steps.ui;
 
-import com.example.entities.Reminder;
+import com.example.entities.generated.Reminder;
 import com.example.services.ui.RemindersListItem;
 import com.example.services.ui.RemindersPage;
 
