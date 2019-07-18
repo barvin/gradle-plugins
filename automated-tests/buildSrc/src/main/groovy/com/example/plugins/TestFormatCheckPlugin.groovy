@@ -67,8 +67,10 @@ class TestFormatCheckPlugin implements Plugin<Project> {
         def result = []
         def testCase = method.findFirst(SingleMemberAnnotationExpr.class, { it.nameAsString == 'TestCase' })
         if (testCase.isPresent()) {
-            if (!testCase.get().memberValue.asStringLiteralExpr().value.matches(~/REM-\d+/)) {
-                result << "@TestCase annotation does not match with format 'REM-1234'"
+            def testCaseValue = testCase.get().memberValue.asStringLiteralExpr().value
+            if (!testCaseValue.matches(~/REM-\d+/)) {
+                result << "@TestCase annotation does not match format 'REM-1234' for test $method.nameAsString. " +
+                    "Actual value: '$testCaseValue'"
             }
         } else {
             result << "No @TestCase annotation found for test $method.nameAsString"
