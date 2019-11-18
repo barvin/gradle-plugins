@@ -12,7 +12,7 @@ import com.example.steps.ui.ReminderSteps;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.OffsetDateTime;
+import static java.time.OffsetDateTime.now;
 
 public class RemindersTest {
 
@@ -20,7 +20,10 @@ public class RemindersTest {
     public Object[][] createReminderData() {
         return new Object[][]{
                 new Object[]{
-                        new Reminder().text("Buy flowers").time(OffsetDateTime.now().plusDays(1)).done(false)
+                        new Reminder()
+                                .text("Buy flowers")
+                                .time(now().plusDays(1))
+                                .done(false)
                 }
         };
     }
@@ -37,10 +40,10 @@ public class RemindersTest {
 
     @DataProvider
     public Object[][] updateReminderData() {
-        return new Object[][]{
-                new Object[]{
-                        new Reminder().text("Old text").time(OffsetDateTime.now().plusDays(1)).done(false),
-                        new Reminder().text("New text").time(OffsetDateTime.now().plusDays(2)).done(false)
+        return new Object[][] {
+                new Object[] {
+                        new Reminder().text("Old text").time(now().plusDays(1)).done(false),
+                        new Reminder().text("New text").time(now().plusDays(2)).done(false)
                 }
         };
     }
@@ -59,9 +62,12 @@ public class RemindersTest {
 
     @DataProvider
     public Object[][] deleteReminderData() {
-        return new Object[][]{
-                new Object[]{
-                        new Reminder().text("Delete me").time(OffsetDateTime.now().plusDays(5)).done(true)
+        return new Object[][] {
+                new Object[] {
+                        new Reminder()
+                                .text("Delete me")
+                                .time(now().plusDays(5))
+                                .done(true)
                 }
         };
     }

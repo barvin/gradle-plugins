@@ -14,7 +14,6 @@
 package com.example.services.api.controllers;
 
 import com.google.gson.reflect.TypeToken;
-import com.example.entities.generated.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,32 +46,32 @@ public class BasicErrorControllerApi {
     }
 
 
-    public ErrorHtmlUsingDELETEOper errorHtmlUsingDELETE() {
-        return new ErrorHtmlUsingDELETEOper(reqSpec);
+    public ErrorUsingDELETEOper errorUsingDELETE() {
+        return new ErrorUsingDELETEOper(reqSpec);
     }
 
-    public ErrorHtmlUsingGETOper errorHtmlUsingGET() {
-        return new ErrorHtmlUsingGETOper(reqSpec);
+    public ErrorUsingGETOper errorUsingGET() {
+        return new ErrorUsingGETOper(reqSpec);
     }
 
-    public ErrorHtmlUsingHEADOper errorHtmlUsingHEAD() {
-        return new ErrorHtmlUsingHEADOper(reqSpec);
+    public ErrorUsingHEADOper errorUsingHEAD() {
+        return new ErrorUsingHEADOper(reqSpec);
     }
 
-    public ErrorHtmlUsingOPTIONSOper errorHtmlUsingOPTIONS() {
-        return new ErrorHtmlUsingOPTIONSOper(reqSpec);
+    public ErrorUsingOPTIONSOper errorUsingOPTIONS() {
+        return new ErrorUsingOPTIONSOper(reqSpec);
     }
 
-    public ErrorHtmlUsingPATCHOper errorHtmlUsingPATCH() {
-        return new ErrorHtmlUsingPATCHOper(reqSpec);
+    public ErrorUsingPATCHOper errorUsingPATCH() {
+        return new ErrorUsingPATCHOper(reqSpec);
     }
 
-    public ErrorHtmlUsingPOSTOper errorHtmlUsingPOST() {
-        return new ErrorHtmlUsingPOSTOper(reqSpec);
+    public ErrorUsingPOSTOper errorUsingPOST() {
+        return new ErrorUsingPOSTOper(reqSpec);
     }
 
-    public ErrorHtmlUsingPUTOper errorHtmlUsingPUT() {
-        return new ErrorHtmlUsingPUTOper(reqSpec);
+    public ErrorUsingPUTOper errorUsingPUT() {
+        return new ErrorUsingPUTOper(reqSpec);
     }
 
     /**
@@ -84,12 +83,12 @@ public class BasicErrorControllerApi {
     }
 
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingDELETEOper {
+    public class ErrorUsingDELETEOper {
 
         public static final String REQ_URI = "/error";
 
@@ -97,15 +96,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingDELETEOper() {
+        public ErrorUsingDELETEOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingDELETEOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingDELETEOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -118,17 +117,17 @@ public class BasicErrorControllerApi {
 
         /**
          * DELETE /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingDELETEOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingDELETEOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -136,18 +135,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingDELETEOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingDELETEOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingGETOper {
+    public class ErrorUsingGETOper {
 
         public static final String REQ_URI = "/error";
 
@@ -155,15 +154,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingGETOper() {
+        public ErrorUsingGETOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingGETOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingGETOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -176,17 +175,17 @@ public class BasicErrorControllerApi {
 
         /**
          * GET /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingGETOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingGETOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -194,18 +193,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingGETOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingGETOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingHEADOper {
+    public class ErrorUsingHEADOper {
 
         public static final String REQ_URI = "/error";
 
@@ -213,15 +212,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingHEADOper() {
+        public ErrorUsingHEADOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingHEADOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingHEADOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -234,17 +233,17 @@ public class BasicErrorControllerApi {
 
         /**
          * HEAD /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingHEADOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingHEADOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -252,18 +251,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingHEADOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingHEADOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingOPTIONSOper {
+    public class ErrorUsingOPTIONSOper {
 
         public static final String REQ_URI = "/error";
 
@@ -271,15 +270,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingOPTIONSOper() {
+        public ErrorUsingOPTIONSOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingOPTIONSOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingOPTIONSOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -292,17 +291,17 @@ public class BasicErrorControllerApi {
 
         /**
          * OPTIONS /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingOPTIONSOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingOPTIONSOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -310,18 +309,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingOPTIONSOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingOPTIONSOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingPATCHOper {
+    public class ErrorUsingPATCHOper {
 
         public static final String REQ_URI = "/error";
 
@@ -329,15 +328,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingPATCHOper() {
+        public ErrorUsingPATCHOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingPATCHOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingPATCHOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -350,17 +349,17 @@ public class BasicErrorControllerApi {
 
         /**
          * PATCH /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingPATCHOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingPATCHOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -368,18 +367,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingPATCHOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingPATCHOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingPOSTOper {
+    public class ErrorUsingPOSTOper {
 
         public static final String REQ_URI = "/error";
 
@@ -387,15 +386,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingPOSTOper() {
+        public ErrorUsingPOSTOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingPOSTOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingPOSTOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -408,17 +407,17 @@ public class BasicErrorControllerApi {
 
         /**
          * POST /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingPOSTOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingPOSTOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -426,18 +425,18 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingPOSTOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingPOSTOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
     }
     /**
-     * errorHtml
+     * error
      * 
      *
-     * return ModelAndView
+     * return Map<String, Object>
      */
-    public class ErrorHtmlUsingPUTOper {
+    public class ErrorUsingPUTOper {
 
         public static final String REQ_URI = "/error";
 
@@ -445,15 +444,15 @@ public class BasicErrorControllerApi {
 
         private ResponseSpecBuilder respSpec;
 
-        public ErrorHtmlUsingPUTOper() {
+        public ErrorUsingPUTOper() {
             this.reqSpec = new RequestSpecBuilder();
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
-        public ErrorHtmlUsingPUTOper(RequestSpecBuilder reqSpec) {
+        public ErrorUsingPUTOper(RequestSpecBuilder reqSpec) {
             this.reqSpec = reqSpec;
-            reqSpec.setAccept("text/html");
+            reqSpec.setAccept("*/*");
             this.respSpec = new ResponseSpecBuilder();
         }
 
@@ -466,17 +465,17 @@ public class BasicErrorControllerApi {
 
         /**
          * PUT /error
-         * @return ModelAndView
+         * @return Map<String, Object>
          */
-        public ModelAndView executeAs(Function<Response, Response> handler) {
-            Type type = new TypeToken<ModelAndView>(){}.getType();
+        public Map<String, Object> executeAs(Function<Response, Response> handler) {
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
             return execute(handler).as(type);
         }
 
         /**
          * Customise request specification
          */
-        public ErrorHtmlUsingPUTOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
+        public ErrorUsingPUTOper reqSpec(Consumer<RequestSpecBuilder> consumer) {
             consumer.accept(reqSpec);
             return this;
         }
@@ -484,7 +483,7 @@ public class BasicErrorControllerApi {
         /**
          * Customise response specification
          */
-        public ErrorHtmlUsingPUTOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
+        public ErrorUsingPUTOper respSpec(Consumer<ResponseSpecBuilder> consumer) {
             consumer.accept(respSpec);
             return this;
         }
