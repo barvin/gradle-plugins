@@ -15,9 +15,12 @@ class SwaggerCodeGenPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.task("generateApi") { task ->
             task.doLast {
+                // Clean up temp dir and existing API client packages
                 File("${project.projectDir}/temp").deleteRecursively()
-                deletePackageDirectories("${project.projectDir}", listOf(INVOKER_PACKAGE, API_PACKAGE, MODEL_PACKAGE))
+                deletePackageDirectories("${project.projectDir}",
+                        listOf(INVOKER_PACKAGE, API_PACKAGE, MODEL_PACKAGE))
 
+                // Configure and run code generation
                 val config = CodegenConfigurator()
                 config.inputSpec = SWAGGER_JSON_URL
                 config.outputDir = "${project.projectDir}/temp"
@@ -31,7 +34,12 @@ class SwaggerCodeGenPlugin : Plugin<Project> {
                         "hideGenerationTimestamp" to "true"
                 )
                 DefaultGenerator().opts(config.toClientOptInput()).generate()
-                File("${project.projectDir}/temp/src/main/java").copyRecursively(File("${project.projectDir}/src/test/java"))
+
+                // Copy generated files to the corresponding directory in sources
+                File("${project.projectDir}/temp/src/main/java")
+                        .copyRecursively(File("${project.projectDir}/src/test/java"))
+
+                // Clean up temp directory
                 File("${project.projectDir}/temp").deleteRecursively()
             }
         }

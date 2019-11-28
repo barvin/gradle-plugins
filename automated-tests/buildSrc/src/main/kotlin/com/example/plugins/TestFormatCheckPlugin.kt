@@ -22,7 +22,7 @@ class TestFormatCheckPlugin : Plugin<Project> {
                         .map { it.result.get() }
                         .forEach { compilationUnit ->
                             compilationUnit.findAll(MethodDeclaration::class.java).forEach { method ->
-                                if (isTest(method)) {
+                                if (method.isTest()) {
                                     errors.addAll(findErrorsWithTestCase(method))
                                     errors.addAll(findErrorsWithMandatoryTestProperties(method))
                                 }
@@ -41,6 +41,30 @@ class TestFormatCheckPlugin : Plugin<Project> {
         }
     }
 
+    private fun MethodDeclaration.isTest(): Boolean =
+            this.findFirst(AnnotationExpr::class.java) { it.nameAsString == "Test" }.isPresent
+
+    /**
+     * TestCase annotation should be present and match certain format
+     */
+    private fun findErrorsWithTestCase(method: MethodDeclaration): List<String> {
+        val result = arrayListOf<String>()
+        val testCase = method.findFirst(SingleMemberAnnotationExpr::class.java) { it.nameAsString == "TestCase" }
+        if (testCase.isPresent) {
+            val testCaseValue = testCase.get().memberValue.asStringLiteralExpr().value
+            if (!testCaseValue.matches(Regex("REM-\\d+"))) {
+                result.add("@TestCase annotation does not match format 'REM-1234' for test " +
+                        "${method.nameAsString}. Actual value: '$testCaseValue'")
+            }
+        } else {
+            result.add("No @TestCase annotation found for test ${method.nameAsString}")
+        }
+        return result
+    }
+
+    /**
+     * Mandatory attributes are description, team and sprint
+     */
     private fun findErrorsWithMandatoryTestProperties(method: MethodDeclaration): List<String> {
         val result = arrayListOf<String>()
         val test = method.findFirst(NormalAnnotationExpr::class.java) { it.nameAsString == "Test" }.get()
@@ -60,23 +84,4 @@ class TestFormatCheckPlugin : Plugin<Project> {
         }
         return result
     }
-
-    private fun findErrorsWithTestCase(method: MethodDeclaration): List<String> {
-        val result = arrayListOf<String>()
-        val testCase = method.findFirst(SingleMemberAnnotationExpr::class.java) { it.nameAsString == "TestCase" }
-        if (testCase.isPresent) {
-            val testCaseValue = testCase.get().memberValue.asStringLiteralExpr().value
-            if (!testCaseValue.matches(Regex("REM-\\d+"))) {
-                result.add("@TestCase annotation does not match format 'REM-1234' for test ${method.nameAsString}. " +
-                        "Actual value: '$testCaseValue'")
-            }
-        } else {
-            result.add("No @TestCase annotation found for test ${method.nameAsString}")
-        }
-        return result
-    }
-
-    private fun isTest(method: MethodDeclaration): Boolean =
-            method.findFirst(AnnotationExpr::class.java) { it.nameAsString == "Test" }.isPresent
-
 }
